@@ -1,10 +1,4 @@
-# This file contains metadata for your plugin. Since
-# version 2.0 of QGIS this is the proper way to supply
-# information about a plugin. The old method of
-# embedding metadata in __init__.py will
-# is no longer supported since version 2.0.
-
-# This file should be included when you package your plugin.
+# Plugin metadata for Layer Tree Image Legend Widget
 
 # Mandatory items:
 [general]
@@ -14,26 +8,18 @@ description=A layer tree widget for displaying image legend in raster layer
 version=1.1.0
 author=GeoProc.com
 email=info@geoproc.com
-
-about=A layer tree widget for displaying image legend in raster layer
-
+about=Use a sidecar PNG file to add an image for a raster layer in QGIS Legend pane. The image generally represents the legend associated with the raster map. Click on the image to display the full size image in your favourite image editor.
 tracker=https://github.com/BC-Consulting/image_legend_widget/issues
 repository=https://github.com/BC-Consulting/image_legend_widget
 # End of mandatory metadata
 
 # Recommended items:
-# Uncomment the following line and add your changelog:
 changelog=1.1.0 Code cleanup
-1.0.0 First public release
-
+          1.0.0 First public release
 # Tags are comma separated with spaces allowed
 tags=python,raster,legend,image,png
-
 homepage=http://geoproc.com/free/image_legend_widget.htm
 category=Plugins
 icon=icon.png
-
-# experimental flag
 experimental=False
-# deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
