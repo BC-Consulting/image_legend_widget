@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """QGIS Toggle Labels Widget
 
-.. note:: This program is free software; you can redistribute it and/or modify
+Note: This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 """
 
-__author__ = '(C) 2019 by GeoProc.com'
+__author__ = 'GeoProc.com'
 __date__ = '24/08/2019'
 __copyright__ = 'Copyright 2019, GeoProc.com'
 # This will get replaced with a git SHA1 when you do a git archive
@@ -42,9 +42,9 @@ from qgis.gui import (
     QgsLayerTreeEmbeddedWidgetProvider
 )
 
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 
-class LayerTreeToggleLabelsWidget(QWidget):
+class LayerTreeImageLegendWidget(QWidget):
     """
     Layer tree widget for displaying image legend in a raster layer
     """
@@ -78,11 +78,11 @@ class LayerTreeToggleLabelsWidget(QWidget):
         self.setLayout(layout)
 
         if self.layer.type() == QgsMapLayer.RasterLayer:
-            self.imgleg.clicked.connect(self.showLegend)
+            self.imgleg.released.connect(self.showLegend)
 
     def showLegend(self, active):
         """
-        Triggered when the image legend is clicked.
+        Triggered when the image legend button is released after click/press.
         """
         webbrowser.open('file:///' + self.my_img)
 #=========================================================================================
@@ -92,16 +92,16 @@ class ImageLegendProvider(QgsLayerTreeEmbeddedWidgetProvider):
     Layer tree provider for Image Legend widgets
     """
 
-    def id(self):  # pylint: disable=missing-docstring
+    def id(self):
         return 'image_legend'
 
-    def name(self):  # pylint: disable=missing-docstring
+    def name(self):
         return QCoreApplication.translate('ImageLegendWidget', 'Image Legend')
 
-    def createWidget(self, layer, _):  # pylint: disable=missing-docstring
-        return LayerTreeToggleLabelsWidget(layer)
+    def createWidget(self, layer, _):
+        return LayerTreeImageLegendWidget(layer)
 
-    def supportsLayer(self, layer):  # pylint: disable=missing-docstring
+    def supportsLayer(self, layer):
         return layer.type() == QgsMapLayer.RasterLayer
 #=========================================================================================
 
