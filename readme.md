@@ -1,7 +1,7 @@
 ![](icon.png) 
 ## *ImageLegend_widget*: A QGIS layer tree (Legend) widget for displaying image legend in a raster layer.
 
-V1.0 - 24 August 2019
+V1.1 - 25 August 2019
 
 This widget works only on QGIS version >= 3.4.
 
