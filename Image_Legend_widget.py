@@ -80,7 +80,7 @@ class LayerTreeImageLegendWidget(QWidget):
         if self.layer.type() == QgsMapLayer.RasterLayer:
             self.imgleg.released.connect(self.showLegend)
 
-    def showLegend(self, active):
+    def showLegend(self):
         """
         Triggered when the image legend button is released after click/press.
         """

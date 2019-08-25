@@ -11,7 +11,7 @@
 name=Layer Tree Image Legend Widget
 qgisMinimumVersion=3.4
 description=A layer tree widget for displaying image legend in raster layer
-version=1.0.0
+version=1.1.0
 author=GeoProc.com
 email=info@geoproc.com
 
@@ -23,7 +23,8 @@ repository=https://github.com/BC-Consulting/image_legend_widget
 
 # Recommended items:
 # Uncomment the following line and add your changelog:
-changelog=1.0.0 First public release
+changelog=1.1.0 Code cleanup
+1.0.0 First public release
 
 # Tags are comma separated with spaces allowed
 tags=python,raster,legend,image,png
