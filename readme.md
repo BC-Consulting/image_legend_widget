@@ -13,7 +13,7 @@ In order to display an image of a legend, the legend file must be a **png** file
 
 where *raster_filename*: is the name, without extension, of the raster displayed in QGIS and ***.legend.png*** is the fixed identity given to the sidecar hosting the legend.
 
-User manual [here](http://www.geoproc.com/free/image_legend_widget.htm)<br>
-GeoProc.com plugins repository for QGIS [here](http://www.geoproc.com/free/plugins.xml)
+User manual [here](http://www.geoproc.com/be/image_legend_widget.htm)<br>
+GeoProc.com plugins repository for QGIS [here](http://www.geoproc.com/be/plugins.xml)
 
 Distributed under the GPL licence.
