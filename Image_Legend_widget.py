@@ -8,7 +8,7 @@ the Free Software Foundation; either version 2 of the License, or
 """
 
 __author__ = 'GeoProc.com'
-__date__ = '24/08/2019'
+__date__ = '11/09/2019'
 __copyright__ = 'Copyright 2019, GeoProc.com'
 # This will get replaced with a git SHA1 when you do a git archive
 __revision__ = '$Format:%H$'
@@ -42,7 +42,7 @@ from qgis.gui import (
     QgsLayerTreeEmbeddedWidgetProvider
 )
 
-VERSION = '1.1.0'
+VERSION = '1.2.0'
 
 class LayerTreeImageLegendWidget(QWidget):
     """
@@ -54,7 +54,9 @@ class LayerTreeImageLegendWidget(QWidget):
         self.layer = layer
         self.my_img = os.path.splitext(layer.source())[0] + '.legend.png'
         if not os.path.exists(self.my_img):
-            return
+            self.my_img = os.path.splitext(layer.source())[0] + '.legend.jpg'
+            if not os.path.exists(self.my_img):
+                return
 
         im = Image.open(self.my_img)
         w, h = im.size
