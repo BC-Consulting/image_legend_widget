@@ -8,12 +8,12 @@ the Free Software Foundation; either version 2 of the License, or
 """
 
 __author__ = 'GeoProc.com'
-__date__ = '11/09/2019'
+__date__ = '24/11/2019'
 __copyright__ = 'Copyright 2019, GeoProc.com'
 # This will get replaced with a git SHA1 when you do a git archive
 __revision__ = '$Format:%H$'
 
-import os
+import os, glob
 import webbrowser
 from PIL import Image
 from qgis.PyQt.QtCore import (
@@ -42,7 +42,7 @@ from qgis.gui import (
     QgsLayerTreeEmbeddedWidgetProvider
 )
 
-VERSION = '1.2.0'
+VERSION = '1.3.0'
 
 class LayerTreeImageLegendWidget(QWidget):
     """
@@ -52,12 +52,26 @@ class LayerTreeImageLegendWidget(QWidget):
     def __init__(self, layer):
         super().__init__()
         self.layer = layer
-        self.my_img = os.path.splitext(layer.source())[0] + '.legend.png'
-        if not os.path.exists(self.my_img):
-            self.my_img = os.path.splitext(layer.source())[0] + '.legend.jpg'
+        # Is this raster using a common legend?
+        pwd = os.getcwd()
+        compath = os.path.split(layer.source())[0]
+        os.chdir(compath)
+        englob = glob.glob("*.legendcommon.*")
+        if len(englob) > 0:
+            # Yes
+            self.my_img = self.getMy_Img()
+        else:
+            # No. Is legend a png file?
+            self.my_img = os.path.splitext(layer.source())[0] + '.legend.png'
             if not os.path.exists(self.my_img):
-                return
+                # No, is it a jpg?
+                self.my_img = os.path.splitext(layer.source())[0] + '.legend.jpg'
+                if not os.path.exists(self.my_img):
+                    # No: abort
+                    os.chdir(pwd)
+                    return
 
+        os.chdir(pwd)
         im = Image.open(self.my_img)
         w, h = im.size
         
@@ -87,6 +101,24 @@ class LayerTreeImageLegendWidget(QWidget):
         Triggered when the image legend button is released after click/press.
         """
         webbrowser.open('file:///' + self.my_img)
+
+    def getMy_Img(self):
+        """
+        Find and return the common legend file.
+           Can only be 1 common legend per folder.
+        """
+        qq = map(glob.glob, ["*.legendcommon.png","*.legendcommon.jpg"])
+        s  = ''
+        for q in qq:
+            try:
+                # qq is made of two lists, one should be empty the other one should only
+                #  have one element: the common legend
+                # If empty list then assignment will cause an error, so at the end only
+                #  one element is stored in s
+                s = q[0]
+            except:
+                pass
+        return s
 #=========================================================================================
 
 class ImageLegendProvider(QgsLayerTreeEmbeddedWidgetProvider):
