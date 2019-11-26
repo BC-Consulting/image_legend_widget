@@ -5,7 +5,7 @@
 name=Layer Tree Image Legend Widget
 qgisMinimumVersion=3.4
 description=A layer tree widget for displaying image legend in raster layer
-version=1.3.0
+version=1.4.0
 author=GeoProc.com
 email=info@geoproc.com
 about=Use a sidecar PNG or JPG file to add an image for a raster layer in QGIS Legend pane. The image generally represents the legend associated with the raster map. Click the layer image to display the full size image in your default image editor.
@@ -14,10 +14,11 @@ repository=https://github.com/BC-Consulting/image_legend_widget
 # End of mandatory metadata
 
 # Recommended items:
-changelog=1.3.0 add logic to deal with common legend between several rasters.
+changelog=1.4.0 change logic for common legend: only use common legend if raster has no legend sidecar on its own.
+          1.3.0 add logic to deal with common legend between several rasters.
           1.2.0 add JPG as sidecar for image legend.
-          1.1.0 Code cleanup.
-          1.0.0 First public release.
+          1.1.0 code cleanup.
+          1.0.0 first public release.
 # Tags are comma separated with spaces allowed
 tags=python,raster,legend,image,png,jpg
 homepage=https://www.geoproc.com/be/image_legend_widget.htm

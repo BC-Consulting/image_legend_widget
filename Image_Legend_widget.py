@@ -52,26 +52,27 @@ class LayerTreeImageLegendWidget(QWidget):
     def __init__(self, layer):
         super().__init__()
         self.layer = layer
-        # Is this raster using a common legend?
-        pwd = os.getcwd()
-        compath = os.path.split(layer.source())[0]
-        os.chdir(compath)
-        englob = glob.glob("*.legendcommon.*")
-        if len(englob) > 0:
-            # Yes
-            self.my_img = self.getMy_Img()
-        else:
-            # No. Is legend a png file?
-            self.my_img = os.path.splitext(layer.source())[0] + '.legend.png'
+        # Is legend a png file?
+        self.my_img = os.path.splitext(layer.source())[0] + '.legend.png'
+        if not os.path.exists(self.my_img):
+            # No, is it a jpg?
+            self.my_img = os.path.splitext(layer.source())[0] + '.legend.jpg'
             if not os.path.exists(self.my_img):
-                # No, is it a jpg?
-                self.my_img = os.path.splitext(layer.source())[0] + '.legend.jpg'
-                if not os.path.exists(self.my_img):
+                # No: is this raster using a common legend?
+                pwd = os.getcwd()
+                compath = os.path.split(layer.source())[0]
+                os.chdir(compath)
+                englob = glob.glob("*.legendcommon.*")
+                if len(englob) > 0:
+                    # Yes
+                    self.my_img = os.path.join(compath, self.getMy_Img())
+                else:
                     # No: abort
                     os.chdir(pwd)
                     return
+                #
+                os.chdir(pwd)
 
-        os.chdir(pwd)
         im = Image.open(self.my_img)
         w, h = im.size
         
